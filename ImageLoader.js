@@ -1,10 +1,9 @@
-//console.log("Loading ImageLoader.js...");
+// Author: Keith Rosenberg (github.com/netpoetica)
 var ImageLoader = function(loaderId){
     // Use LoaderID as your loader element, give it a listener for ImagesLoaded. The ImageLoader object will
     // fire an ImagesLoaded event when it completes and it will call a specified callback. You can also specify body or document.
     // If you don't specify a loader ID, document will be default.
-    console.log("Instantiating ImageLoader.js...");
-
+    
     // Private members
     var totalImages = 0,            // How many load events are we waiting for?
     imgElems = [],                  // Array of image element objects with id/element pairs
@@ -50,18 +49,13 @@ var ImageLoader = function(loaderId){
             $(options.element).find('*').filter(function(){ 
                 if($(this).prop('tagName') == 'IMG'){ 
                     src = $(this).attr('src');
-                    //console.log("Adding image " + totalImages +": " + src);
                     addImgElem(totalImages, src);
                 }
                 else if($(this).css('background-image') != 'none'){
                     src = ($(this).css('background-image')).replace(/(^url\()|(\)$|[\"\'])/g, '');
-                    //console.log("background-image " + totalImages +": " + src);
                     addImgElem(totalImages, src);
                 }
             });
-        }
-        else {
-            console.log("No element specified for scraping.")
         }
         
         // Load any extra user-specified images
@@ -76,15 +70,11 @@ var ImageLoader = function(loaderId){
                 } 
             }
         }  
-        else {
-            console.log("No extra image SRCs specified by user.");
-        }
 
         // Meat and potatoes - make images dispatch load events, when the final image is loaded, remove loader
         len = totalImages;
         while(len){
             len--;
-            //console.log("IMG: " + imgElems[len].context.src)
             $(imgElems[len]).each(function(){
                 var id = this.id; 
                 $(this.elem)
